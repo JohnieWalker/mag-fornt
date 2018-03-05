@@ -1,0 +1,47 @@
+<bms-auth-header></bms-auth-header>
+<div class="row">
+  <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
+    <div [@signinCardState]="signinCardState" class="card blue-grey darken-2">
+      <div class="card-content">
+        <div class="row">
+          <form class="col s12" autocomplete="off" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="input-field">
+                <i class="material-icons prefix" [ngClass]="{'active': isLdapInputActive}">perm_identity</i>
+                <input type="text" id="ldap" autofocus formControlName="ldap" (focus)="activateLdapInput()" (blur)="deactivateLdapInput()">
+                <label for="ldap" [ngClass]="{'active': isLdapInputActive}">AD</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <i class="material-icons prefix" [ngClass]="{'active': isPasswordInputActive}">vpn_key</i>
+                <input #adPasswordInput  type="password" id="ad_password" formControlName="ad_password" (focus)="activatePasswordInput()" (blur)="deactivatePasswordInput()">
+                <label for="ad_password" [ngClass]="{'active': isPasswordInputActive}">AD Password</label>
+              </div>
+            </div>
+            <div class="row center-align">
+              <button class="btn-large waves-effect waves-light blue-grey" type="submit" [disabled]="!signinForm.valid || signinStatus === 'inprogress' || signinStatus === 'success'">
+                <div *ngIf="signinStatus === 'inprogress'" class="preloader-wrapper small active block">
+                  <div class="spinner-layer spinner-teal-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+                <i *ngIf="signinStatus === 'success'" class="large material-icons block light-green-text text-darken-1">done</i>
+                <div *ngIf="signinStatus === 'none'">Log In</div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div [@toastState]="toastState" class="toast red lighten-2 black-text">Login failed: {{signinErrorMessage}}</div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+ul {
+  border:none;
+}
+.collapsible-header, .collapsible-body {
+  border-bottom: 1px solid #263238;
+}
+.collapsible-body {
+  padding:20px;
+}
+.collapsible-body.active {
+  display: block;
+}
+.collection-item {
+  border-bottom: 1px solid #37474f;
+}
+.collapsible-header:hover {
+  background-color: #455a64 !important;
+}

@@ -1,0 +1,7 @@
+.secondary-content {
+  opacity: 0.5;
+}
+.secondary-content:hover {
+  opacity: 1;
+  cursor: pointer;
+}

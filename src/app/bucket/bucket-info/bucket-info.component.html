@@ -1,0 +1,16 @@
+<div class="row center-align">
+  <h3>{{bucketName}}</h3>
+</div>
+<div class="row container">
+  <bms-breadcrumbs [bucketName]="bucketName"></bms-breadcrumbs>
+</div>
+<div class="row container">
+  <bms-upload [bucketName]="bucketName"></bms-upload>
+</div>
+<div class="row container" [hidden]="!isBucketExists">
+  <bms-object-search [bucketName]="bucketName" [prefix]="prefix" (objectValueChanged)="onObjectSearchValueChanged($event)"></bms-object-search>
+</div>
+<div class="row container" [hidden]="!isBucketExists">
+  <div *ngIf="isObjectsEmpty" class="chip warn"> No results were found ! </div>
+  <bms-objects-list [objects]="objects" [searchValue]="searchValue"></bms-objects-list>
+</div>

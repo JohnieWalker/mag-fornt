@@ -1,0 +1,6 @@
+<form autocomplete="off" [formGroup]="objectSearchForm">
+  <div class="input-field">
+    <input id="objectName" formControlName="objectName" autofocus type="text" (focus)="activateObjectSearch()" (blur)="deactivateObjectSearch();">
+    <label for="objectName" [ngClass]="{'active': isObjectSearchActive}">Search</label>
+  </div>
+</form>

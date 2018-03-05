@@ -1,0 +1,23 @@
+.secondary-content {
+  opacity: 0.5;
+}
+.secondary-content:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.info{
+  color: #00529B;
+  background-color: #BDE5F8;
+}
+.error{
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+.warn{
+  color: #9F6000;
+  background-color: #FEEFB3;
+  height: 100%;
+}
+.warning-icon {
+  vertical-align: sub;
+}

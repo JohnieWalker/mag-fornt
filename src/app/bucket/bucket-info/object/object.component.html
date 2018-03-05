@@ -1,0 +1,23 @@
+<li>
+  <div *ngIf="isFolder(object)" (click)="getObjects(object.s3ObjectSummary.key); clickOnFolder()" class="collapsible-header blue-grey darken-3">
+    <i class="teal-text material-icons">folder</i>
+    <a>{{ searchValue ? object.s3ObjectSummary.key : (object.s3ObjectSummary.key | noPrefix) }}</a>
+  </div>
+  <div *ngIf="!isFolder(object)" (click)="getObjectHistory(object.s3ObjectSummary.key); toggleVersionsList()" class="collapsible-header blue-grey darken-3">
+    <i class="teal-text material-icons">insert_drive_file</i>
+    {{ searchValue ? object.s3ObjectSummary.key : (object.s3ObjectSummary.key | noPrefix) }}
+  </div>
+  <div class="collapsible-body blue-grey darken-3" [ngClass]="{'active': isVersionActive}">
+    <ul class="collection">
+      <li *ngFor="let version of objectVersions" class="collection-item avatar blue-grey darken-2">
+        <i class="material-icons circle teal">insert_drive_file</i>
+        <span class="title">Version ID: {{version.s3ObjectSummary.versionId}}</span>
+        <p class="grey-text" style="padding: 0;">Last Modified: {{version.s3ObjectSummary.lastModified | date:'medium'}}<br>
+          Storage class: {{version.s3ObjectSummary.storageClass}}<br>
+          Link: <a [href]="version.downloadLink">{{version.downloadLink}}</a><br>
+          Size: {{version.s3ObjectSummary.size/1024/1024 | number:'.2'}} MB
+        </p>
+      </li>
+    </ul>
+  </div>
+</li>

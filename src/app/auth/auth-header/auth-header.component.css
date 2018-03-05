@@ -1,0 +1,10 @@
+div {
+  height: 250px;
+  width: 100%;
+  position: absolute;
+  top: -250px;
+}
+h3 {
+  font-weight: 200;
+  padding-top: 60px;
+}

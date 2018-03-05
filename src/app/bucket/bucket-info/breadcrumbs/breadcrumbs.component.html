@@ -1,0 +1,2 @@
+<a (click)="getObjects('')" class="breadcrumb">{{bucketName}}</a>
+<a *ngFor="let folder of folders" (click)="getObjects(folder + '/')" class="breadcrumb">{{folder}}</a>

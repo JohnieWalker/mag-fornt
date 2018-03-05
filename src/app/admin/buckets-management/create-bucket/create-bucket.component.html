@@ -1,0 +1,47 @@
+<div class="row container">
+  <h3 class="center-align">Create new bucket</h3>
+  <form autocomplete="off" [formGroup]="createBucketForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="isCreationSuccessfull" class="chip error"> Something went wrong : {{error.error}}, {{error.message}} <br><br></div>
+    <div class="row">
+      <div class="input-field">
+        <input type="text" id="bucketName" autofocus formControlName="bucketName" (focus)="activateBucketNameInput()" (blur)="deactivateBucketNameInput()">
+        <label for="bucketName" [ngClass]="{'active': isBucketNameActive}">Bucket Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input type="text" id="accountId" autofocus formControlName="accountId" (focus)="activateAccountIdInput()" (blur)="deactivateAccountIdInput()">
+        <label for="accountId" [ngClass]="{'active': isAccountIdActive}">AWS Account Id</label>
+      </div>
+    </div>
+    <div class="row">
+      <input type="checkbox" formControlName="isSite" class="filled-in" id="isSite" />
+      <label for="isSite">Bucket is site</label>
+      <br>
+      <input type="checkbox" formControlName="isPublic" class="filled-in" id="isPublic" />
+      <label for="isPublic">Bucket is public</label>
+    </div>
+    <div *ngIf="createBucketForm.value.isSite" class="row">
+      <div class="input-field">
+        <input type="text" id="indexPage" autofocus formControlName="indexPage" (focus)="activateIndexPageInput()" (blur)="deactivateIndexPageInput()">
+        <label for="indexPage" [ngClass]="{'active': isIndexPageActive}">Index page</label>
+      </div>
+    </div>
+    <div *ngIf="createBucketForm.value.isSite" class="row">
+      <div class="input-field">
+        <input type="text" id="errorPage" autofocus formControlName="errorPage" (focus)="activateErrorPageInput()" (blur)="deactivateErrorPageInput()">
+        <label for="errorPage" [ngClass]="{'active': isErrorPageActive}">Error page</label>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn-large waves-effect waves-light blue-grey darken-3" type="submit" [disabled]="!createBucketForm.valid">Create</button>
+    </div>
+    <div class="row">
+      <div class="validation-error">
+        <i *ngIf="!createBucketForm.controls['bucketName'].valid" class="material-icons red-text text-lighten-1">clear</i>
+        <i *ngIf="createBucketForm.controls['bucketName'].valid" class="material-icons green-text text-lighten-1">done</i>
+        <span>Bucket name should start with "bms-"</span>
+      </div>
+    </div>
+  </form>
+</div>

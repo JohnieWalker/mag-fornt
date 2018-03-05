@@ -1,0 +1,12 @@
+.buckets-list-wrapper {
+  border: none;
+}
+.buckets-list-wrapper a {
+  border-bottom: 1px solid #263238;
+}
+.buckets-list-wrapper a:last-child {
+  border: none;
+}
+.collection-item:hover {
+  background-color: #455a64 !important;
+}

@@ -1,0 +1,46 @@
+<form autocomplete="off" *ngIf="isCreationFormOpened || isUpdateFormOpened" [formGroup]="newGroupForm" (ngSubmit)="saveNewGroup(newGroupForm)">
+
+  <div *ngIf="isCreationFormOpened" class="chip warn"><i class="material-icons tiny warning-icon">warning</i> Ensure that you adding existed AD group here. If you don't have
+    any AD group yet, please ask <a class="warn" href=""></a> to setup.</div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input [readonly]="isUpdateFormOpened" id="newGroupName" formControlName="groupName" (focus)="activateNewGroupNameInput()"
+        [ngModel]="group.name">
+      <label for="newGroupName" [ngClass]="{'active': isNewGroupNameInputActive}">Group Name</label>
+    </div>
+  </div>
+
+  <div formArrayName="buckets">
+    <div *ngFor="let bucket of newGroupForm.controls.buckets.controls; let i=index" class="panel panel-default">
+      <div class="panel-heading">
+        <a (click)="removeBucketFromNewGroup(i)" class="secondary-content red-text text-lighten-1"><i class="material-icons">delete</i></a>
+      </div>
+      <div class="panel-body" [formGroupName]="i">
+        <div class="form-group col-xs-6">
+          <label for="bucket">Bucket {{i + 1}}</label>
+          <input formControlName="bucket" id="bucket" [ngModel]="getValueOfBucket(i)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s6">
+      <a (click)="addBucketToNewGroup()" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </div>
+  </div>
+
+  <div class="col">
+    <button *ngIf="isCreationFormOpened" type="submit" class="waves-effect waves-light btn" [disabled]="!newGroupForm.valid">Add</button>
+    <button *ngIf="isUpdateFormOpened" type="submit" class="waves-effect waves-light btn" [disabled]="!newGroupForm.valid">Update</button>
+    <button class="waves-effect waves-light btn close" (click)="isCreationFormOpened = false; isUpdateFormOpened = false">Close</button>
+  </div>
+
+</form>
+
+<button *ngIf="!isCreationFormOpened && !isUpdateFormOpened" type="submit" class="waves-effect waves-light btn" (click)="openCreationForm();closeUpdateForm()">Add Group</button>
+
+<div *ngIf="isSuccessfullyCreated" class="chip info"> Group was successfully created ! </div>
+<div *ngIf="isSuccessfullyUpdated" class="chip info"> Group was successfully updated ! </div>
+<div *ngIf="isSuccessfullyDeleted" class="chip info"> Group was successfully deleted ! </div>
+<div *ngIf="isUnsuccessfullAction" class="chip error"> Something went wrong : {{error.error}}, {{error.message}} </div>

@@ -1,0 +1,7 @@
+<div class="collection z-depth-1 buckets-list-wrapper">
+  <a *ngFor="let bucket of buckets | filterName:bucketsFilterValue" [routerLink]="['/bucket', bucket]" class="collection-item blue-grey darken-3" href="#">
+    <span
+      [innerHTML]="bucket | highlight:bucketsFilterValue"
+    ></span>
+  </a>
+</div>

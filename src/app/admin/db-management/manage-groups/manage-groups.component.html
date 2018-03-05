@@ -1,0 +1,9 @@
+<div class="row container">
+  <h3 class="center-align">Access to Buckets</h3>
+
+  <div class="row">
+    <bms-groups-create-update [group]="group"></bms-groups-create-update>
+  </div>
+
+  <bms-groups-list (groupClickAction)="handleClickOnGroup($event)"></bms-groups-list>
+</div>

@@ -1,0 +1,31 @@
+<div class="row container">
+  <h3 class="center-align">Buckets</h3>
+
+  <div class="row">
+    <form autocomplete="off" *ngIf="isAddFormOpened" [formGroup]="newBucketForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="newBucketName" formControlName="bucketName" (focus)="activateNewBucketNameInput()" (blur)="deactivateNewBucketNameInput()">
+          <label for="newBucketName" [ngClass]="{'active': isNewBucketNameInputActive}">Bucket Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="newBucketAccountId" formControlName="accountId" (focus)="activateNewBucketAccountIdInput()" (blur)="deactivateNewBucketAccountIdInput()">
+          <label for="newBucketAccountId" [ngClass]="{'active': isNewBucketAccountIdInputActive}">Account Id</label>
+        </div>
+      </div>
+      <div class="col">
+        <button type="submit" class="waves-effect waves-light btn" [disabled]="!newBucketForm.valid">Create</button>
+        <button class="waves-effect waves-light btn" (click)="isAddFormOpened = false;">Close</button>
+      </div>
+    </form>
+    <button *ngIf="!isAddFormOpened" type="submit" class="waves-effect waves-light btn" (click)="openAddForm()">Add Bucket to Account</button>
+  </div>
+  <bms-buckets-list
+    *ngFor="let account of accountIdsWithBucketsList"
+    [accountId]="account.accountId"
+    [buckets]="account.buckets"
+    (bucketHasBeenDeleted)="deleteBucketFromView($event)"
+    (bucketHasBeenAdded)="addBucketToView($event)"
+  ></bms-buckets-list>
+
+</div>

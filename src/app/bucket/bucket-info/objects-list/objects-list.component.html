@@ -1,0 +1,13 @@
+<ul *ngIf="objects.length !== 0" class="sz-depth-1 bms-scrollable" data-collapsible="accordion">
+  <div>
+    <bms-object *ngFor="let object of objects.bucketObjects" [object]="object" [searchValue]="searchValue"></bms-object>
+  </div>
+</ul>
+<ul class="pagination">
+  <li>
+    <div [hidden]="(!isExecutedMoreOnce) "><button class="waves-effect waves-light btn" (click)="resetData()">Reset</button></div>
+  </li>
+  <li>
+    <div [hidden]="(objects.nextPageToken === null) || (isExecutingMore)"><button class="waves-effect waves-light btn bms-more-button" (click)="fetchMoreData()">More</button></div>
+  </li>
+</ul>

@@ -1,0 +1,16 @@
+html * {
+  font-weight: 300;
+}
+
+.main-progress {
+  position: fixed;
+  top: 0;
+  margin: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.loading-label {
+  padding-top: 125px;
+}

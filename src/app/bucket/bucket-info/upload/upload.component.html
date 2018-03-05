@@ -1,0 +1,48 @@
+<form [formGroup]="uploadForm">
+  <div class="file-field input-field">
+    <div *ngIf="!isErrorAction" class="btn upload-btn">
+      <span>Upload</span>
+      <input formControlName="fileToUpload" type="file" ng2FileSelect [uploader]="uploader" multiple />
+    </div>
+    <div *ngIf="isErrorAction" class="chip err"><i class="material-icons tiny err-icon">error</i> Bucket not found. If you feel it was removed by mistake please send
+      request to
+      <a class="err" href=""></a> to create it.
+    </div>
+  </div>
+</form>
+<table *ngIf="uploader.queue.length !== 0" class="bordered centered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Actions</th>
+      <th>Progress</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of uploader.queue">
+      <td><strong>{{ item?.file?.name }}</strong></td>
+      <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+      <td>
+        <div class="tooltip">
+          <button class="btn-floating btn green lighten-1 tooltip" (click)="upload(item);" [disabled]="item.isReady || item.isUploading || item.isSuccess"><i class="material-icons tiny">file_upload</i></button>
+          <div [hidden]="item.isReady || item.isUploading || item.isSuccess" class="tooltiptext">Click to upload</div>
+        </div>
+        <button class="btn-floating btn yellow darken-2" (click)="item.cancel()" [disabled]="!item.isUploading"><i class="material-icons tiny">not_interested</i></button>
+        <button class="btn-floating btn red lighten-2" (click)="item.remove()"><i class="material-icons tiny">delete</i></button>
+      </td>
+      <td>
+        {{item.progress}}%
+        <div class="progress">
+          <div class="determinate" [ngStyle]="{'width': item.progress + '%'}"></div>
+        </div>
+      </td>
+      <td class="center-align">
+        <i *ngIf="item.isSuccess" class="material-icons">done</i>
+        <i *ngIf="item.isCancel" class="material-icons">not_interested</i>
+        <i *ngIf="item.isError" class="material-icons red-text text-lighten-1">error</i>
+      </td>
+    </tr>
+  </tbody>
+</table>

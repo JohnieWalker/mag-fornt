@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="card blue-grey darken-3">
+    <div class="card-content white-text">
+      <span class="card-title">Account ID: {{accountId}}</span>
+      <div class="collection z-depth-1 buckets-list-wrapper">
+        <a *ngFor="let bucketName of buckets" class="collection-item blue-grey darken-2">
+          <span>{{bucketName}}</span>
+          <a (click)="deleteBucket(bucketName, accountId)" class="secondary-content red-text text-lighten-1"><i class="material-icons">delete</i></a>
+        </a>
+      </div>
+      <div class="row">
+        <form autocomplete="off" *ngIf="isAddFormOpened" [formGroup]="newBucketForm" (ngSubmit)="onSubmit()">
+          <div class="input-field col s12">
+            <input id="newBucketName" formControlName="bucketName" (focus)="activateNewBucketNameInput()" (blur)="deactivateNewBucketNameInput()">
+            <label for="newBucketName" [ngClass]="{'active': isNewBucketNameInputActive}">Bucket Name</label>
+          </div>
+          <div class="col">
+            <button type="submit" class="waves-effect waves-light btn" [disabled]="!newBucketForm.valid">Create</button>
+            <button id="closeBtn" class="waves-effect waves-light btn" (click)="isAddFormOpened = false;">Close</button>
+          </div>
+        </form>
+      </div>
+      <a *ngIf="!isAddFormOpened" class="waves-effect waves-light btn" (click)="openAddForm()">Add Bucket</a>
+    </div>
+  </div>
+</div>

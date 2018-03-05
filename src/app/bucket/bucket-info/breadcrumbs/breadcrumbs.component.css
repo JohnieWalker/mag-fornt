@@ -1,0 +1,8 @@
+a {
+  line-height: 37px;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #cfd8dc;
+}

@@ -1,0 +1,6 @@
+<form id="bucketSearch" autocomplete="off" [formGroup]="bucketSearchForm">
+  <div class="input-field col s12">
+    <input id="bucketName" formControlName="bucketName" type="text" autofocus (focus)="activateBucketForm()" (blur)="deactivateBucketForm()">
+    <label for="bucketName" [ngClass]="{'active': isBucketFormActive}">Search</label>
+  </div>
+</form>
