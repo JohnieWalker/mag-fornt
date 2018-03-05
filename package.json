@@ -7,14 +7,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build:prod": "npm install --silent && ./node_modules/.bin/ng build --prod --aot --no-progress",
-    "start:prod": "ng serve",
-    "build:qa": "ng serve",
-    "start:qa": "ng serve",
+    "start:prod": "PORT=3000 DEBUG=bms-wex-project ./node_modules/.bin/forever start bin/www",
+    "build:qa": "npm install --silent && ./node_modules/.bin/ng build --environment=qa --aot --no-progress",
+    "start:qa": "PORT=3000 DEBUG=bms-wex-project ./node_modules/.bin/forever start bin/www",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor",
-    "build": "ng build -prod",
-    "postbuild": "npm run deploy"
+    "e2e": "protractor"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +32,7 @@
     "forever": "^0.15.3",
     "materialize-css": "^0.98.1",
     "morgan": "^1.8.1",
+    "newrelic": "^1.38.2",
     "ng2-file-upload": "^1.2.0",
     "rxjs": "^5.0.1",
     "serve-favicon": "^2.4.1",
